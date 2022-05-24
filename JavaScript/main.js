@@ -91,6 +91,7 @@ function mostrarPeliculas () {
 
 
 mostrarMenu();
-registro();
-mostrarPeliculas ();
+
+
+mostrarPeliculas();
 
