@@ -27,7 +27,7 @@ function mostrarMenu() {
         }
        case 2: {
             logIn();
-            break;
+            return (menuPeliculas());
         }
         case 3: {
             alert ("Adios");
@@ -59,39 +59,85 @@ function registro() {
 console.log("Usuarios: ", usuariosRegistrados);
 
 
+//Funcion para loguearte una vez registrado
 
+function logIn() {
+    let userName = prompt("Ingrese su User Name:");
+    let password = prompt("Ingrese su Password:");
 
-//Listado de peliculas precargadas//
-
-class Pelicula {
-    constructor(id, titulo){
-        this.id=id;
-        this.titulo=titulo;
+    if ( userName === userName && password === password) {
+        alert ("Bienvenido");
+    } else {
+        alert ("Usuario y/o contraseña incorrecta")
+        return;
     }
 }
 
-const peli1 = new Pelicula(1, "Dracula");
-const peli2 = new Pelicula(2, "Frankenstein");
-const peli3 = new Pelicula(3, "La Momia");
-const peli4 = new Pelicula(4, "El hombre invisible");
-const peli5 = new Pelicula(5, "La novia de Frankenstein");
-const peli6 = new Pelicula(6, "El hombre lobo");
-const peli7 = new Pelicula(7, "El fantasma de la Opera");
-const peli8 = new Pelicula(8, "La criatura de la laguna negra");
 
-const peliculas = [peli1,peli2, peli3, peli4,peli5,peli6,peli7,peli8];
+//Listado de peliculas precargadas
+
+class Pelicula {
+    constructor(id, titulo, año, actor){
+        this.id=id;
+        this.titulo=titulo;
+        this.año=año;
+        this.actor=actor;
+    }
+}
+
+const peliculas = [];
+
+peliculas.push(new Pelicula("1", "Dracula", "1931", "Bela Lugosi"));
+peliculas.push(new Pelicula("2", "Frankenstein", "1931", "Boris Karloff"));
+peliculas.push(new Pelicula("3", "The Mummy", "1932", "Boris Karloff"));
+peliculas.push(new Pelicula("4", "The invisible man", "1933", "Claude Rains"));
+peliculas.push(new Pelicula("5", "The bride of Frankenstein", "1935", "Elsa Lanchester"));
+peliculas.push(new Pelicula("6", "The Wolf man", "1941", "Lon Chaney Jr"));
+peliculas.push(new Pelicula("7", "Phantom of the Opera", "1943", "Nelson Eddy"));
+peliculas.push(new Pelicula("8", "Creature from the black lagoon", "1954", "Ben Chapman"));
 
 
+//Menu para ver o buscar peliculas
+function menuPeliculas() {
+    let opcion = Number(prompt(`Ingrese una opcion: 
+                                        1- Ver listado de peliculas
+                                        2- Buscar Pelicula
+                                        3- Salir`))
+
+            switch (opcion) {
+                case 1: {
+                    mostrarPeliculas();
+                    return menuPeliculas();
+                }
+                case 2: {
+                    buscarPeliculas();
+                    return menuPeliculas();
+                }
+                case 3: {
+                    break;
+                }
+
+            }   
+}
 
 function mostrarPeliculas () {
-    console.log("LISTA DE PELICULAS", peliculas)
-   
+    console.log("LISTADO DE PELICULAS");
+    peliculas.forEach((Pelicula)=>{
+    console.log(Pelicula);
+    })
 }
-  
+
+function buscarPeliculas() {
+    let titulo = prompt("Ingresa la pelicula que quieras buscar");
+    let encontrado = peliculas.find((Pelicula)=>Pelicula.titulo.toLowerCase().indexOf(titulo.toLocaleLowerCase())!==-1);
+    console.log("RESULTADO DE BUSQUEDA: ", encontrado);  
+}    
 
 
+
+alert (`Bienvenido a Horrorflix!  
+Sitio de peliculas clasicas de terror de Universal`);
 mostrarMenu();
 
 
-mostrarPeliculas();
 
